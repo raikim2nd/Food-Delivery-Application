@@ -1,27 +1,20 @@
 package com.raiki.app.rest.controller;
 
 import com.raiki.app.rest.model.Weather;
-import com.raiki.app.rest.repository.WeatherRepository;
+import com.raiki.app.rest.weather.DeliveryData;
 import com.raiki.app.rest.weather.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// siia vist lisada ka @RequestMapping
 @RestController
-//@RequestMapping("/") hetkel töötab ka ilma selleta
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/")
 public class WeatherController {
 
     @Autowired
     private WeatherService weatherService;
-    // siia ilmselt repot pole vaja selliselt, vaid hoopis @Autowired WeatherService
-    //@Autowired
-    //private WeatherRepository weatherRepository;
-
-
-    // meetodi parameetrisse vist @RequestBody annotatsioon, kui service klassi meetodil on mingid sisendid
-
 
     @GetMapping("/")
     public String getPage() {
@@ -31,6 +24,12 @@ public class WeatherController {
     @GetMapping("/weather")
     public List<Weather> getWeather() {
         return weatherService.getAllWeatherData();
+    }
+
+    @PostMapping("/delivery")
+    public String calculateDeliveryFee(@RequestBody DeliveryData deliveryData) {
+        System.out.println(deliveryData.getCity() + " : " + deliveryData.getVehicle());
+        return weatherService.calculateDeliveryFee(deliveryData.getCity(), deliveryData.getVehicle());
     }
 
     /*

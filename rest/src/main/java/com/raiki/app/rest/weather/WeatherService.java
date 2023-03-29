@@ -5,7 +5,6 @@ import com.raiki.app.rest.repository.WeatherRepository;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -66,8 +65,7 @@ public class WeatherService {
 
     public List<Weather> getAllWeatherData() {
         System.out.println("GetAllWeatherData");
-        List<Weather> result = (List<Weather>) weatherRepository.findAll();
-        return result;
+        return (List<Weather>) weatherRepository.findAll();
         /*
         // Kui mingi error tühja listiga, siis:
         if (result.size() > 0) return result;
@@ -81,7 +79,92 @@ public class WeatherService {
         return jdbcTemplate.query(sql, new WeatherRowMapper()).get(0);
     }
 
+    /*
+    public float calculateDeliveryFeeForCar(String city){
+        return switch (city) {
+            case "Tallinn" -> 4;
+            case "Tartu" -> 3.5f;
+            case "Pärnu" -> 3f;
+            default -> 0;
+        };
+    }
+
+    public float calculateDeliveryFeeForScooter(String city) throws Exception {
+        float deliveryFee = 0f;
+        String sql = "";
+        // regular base fee
+        switch (city) {
+            case "Tallinn": {
+                deliveryFee += 3.5f;
+                sql = "select * from weather where name='Tallinn-Harku' order by timestamp DESC limit 1";
+                break;
+            }
+            case "Tartu": {
+                deliveryFee += 3f;
+                sql = "select * from weather where name='Tartu-Tõravere' order by timestamp DESC limit 1";
+                break;
+            }
+            case "Pärnu": {
+                deliveryFee += 2.5f;
+                sql = "select * from weather where name='Pärnu' order by timestamp DESC limit 1";
+                break;
+            }
+        }
+        Weather latestWeather = jdbcTemplate.query(sql, new WeatherRowMapper()).get(0);
+        System.out.println(latestWeather.toString());
+        return deliveryFee + getAirTemperatureExtraFee(latestWeather.temperature()) + getWeatherPhenomenonExtraFee("Thunder");
+    }
+
+    public float calculateDeliveryFeeForBike(String city) throws Exception {
+        System.out.println("City: " + city);
+        float deliveryFee = 0f;
+        String sql = "";
+        // regular base fee
+        switch (city) {
+            case "Tallinn": {
+                deliveryFee += 3f;
+                sql = "select * from weather where name='Tallinn-Harku' order by timestamp DESC limit 1";
+                break;
+            }
+            case "Tartu": {
+                deliveryFee += 2.5f;
+                sql = "select * from weather where name='Tartu-Tõravere' order by timestamp DESC limit 1";
+                break;
+            }
+            case "Pärnu": {
+                deliveryFee += 2f;
+                sql = "select * from weather where name='Pärnu' order by timestamp DESC limit 1";
+                break;
+            }
+        }
+        Weather latestWeather = jdbcTemplate.query(sql, new WeatherRowMapper()).get(0);
+        return deliveryFee + getAirTemperatureExtraFee(latestWeather.temperature()) +
+                getWindSpeedExtraFee(latestWeather.windspeed()) + getWeatherPhenomenonExtraFee(latestWeather.phenomenon());
+    }
+
+    public float getAirTemperatureExtraFee(float temperature) {
+        if (temperature < -10f) return 1f;
+        else if (temperature >= -10f && temperature <= 0f) return 0.5f;
+        else return 0;
+    }
+
+    public float getWindSpeedExtraFee(float windspeed) throws Exception {
+        if (windspeed > 20f) throw new Exception();
+        else if (windspeed <= 20f && windspeed >= 10f) return 0.5f;
+        else return 0;
+    }
+
+    public float getWeatherPhenomenonExtraFee(String phenomenon) throws Exception {
+        if (phenomenon.contains("snow") || phenomenon.contains("sleet")) return 1f;
+        else if (phenomenon.contains("rain")) return 0.5f;
+        else if (phenomenon.equals("Glaze") || phenomenon.equals("Hail") ||
+                phenomenon.toLowerCase().contains("thunder")) throw new Exception();
+        else return 0;
+    }
+     */
+
     // return string because of possibility of error message
+    /*
     public String calculateDeliveryFee(String city, String vehicle) {
         String sql;
         Weather latestWeather = null;
@@ -159,4 +242,5 @@ public class WeatherService {
         System.out.println("temperature: " + latestWeather.temperature() + " and phenomenon: " + latestWeather.phenomenon() + " and windspeed: " + latestWeather.windspeed() + " and final delivery fee:" + deliveryFee);
         return deliveryFee+"";
     }
+     */
 }

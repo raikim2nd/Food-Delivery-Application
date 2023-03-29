@@ -1,7 +1,7 @@
 package com.raiki.app.rest.controller;
 
 import com.raiki.app.rest.model.Weather;
-import com.raiki.app.rest.weather.DeliveryData;
+import com.raiki.app.rest.delivery.DeliveryData;
 import com.raiki.app.rest.weather.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/")
+//@CrossOrigin(origins = "http://localhost:3000")
+//@RequestMapping("/")
 public class WeatherController {
 
     @Autowired
@@ -26,11 +26,20 @@ public class WeatherController {
         return weatherService.getAllWeatherData();
     }
 
+
+    // enne muudatusi returnis stringi, proovida selle exceptioniga
+    /*
     @PostMapping("/delivery")
-    public String calculateDeliveryFee(@RequestBody DeliveryData deliveryData) {
-        System.out.println(deliveryData.getCity() + " : " + deliveryData.getVehicle());
-        return weatherService.calculateDeliveryFee(deliveryData.getCity(), deliveryData.getVehicle());
+    public float calculateDeliveryFee(@RequestBody DeliveryData deliveryData) throws Exception {
+        System.out.println("Deliverydata: " + deliveryData.getCity() + " - " + deliveryData.getVehicle());
+        return switch (deliveryData.getVehicle()) {
+            case "Car" -> weatherService.calculateDeliveryFeeForCar(deliveryData.getCity());
+            case "Scooter" -> weatherService.calculateDeliveryFeeForScooter(deliveryData.getCity());
+            case "Bike" -> weatherService.calculateDeliveryFeeForBike(deliveryData.getCity());
+            default -> 0;
+        };
     }
+     */
 
     /*
     @GetMapping("/weather")

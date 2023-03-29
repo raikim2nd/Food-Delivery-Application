@@ -1,4 +1,4 @@
-package com.raiki.app.rest.weather;
+package com.raiki.app.rest.delivery;
 
 public class DeliveryData {
 

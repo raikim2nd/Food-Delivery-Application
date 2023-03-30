@@ -3,6 +3,9 @@ package com.raiki.app.rest.weather;
 import jakarta.xml.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Class for reading and storing data from the weather portal
+ */
 @XmlRootElement
 public class Observations {
     private Long timestamp;
@@ -13,16 +16,8 @@ public class Observations {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     @XmlElement(name = "station")
     public List<Station> getStationList() {
         return stationList;
-    }
-
-    public void setStationList(List<Station> stationList) {
-        this.stationList = stationList;
     }
 }

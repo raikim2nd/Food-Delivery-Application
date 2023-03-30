@@ -21,30 +21,27 @@ export default function Selections() {
         setVehicle(event.target.value);
     };
 
-    //var result;
-    //var jsonresult;
     const [deliveryFee, setDeliveryFee] = React.useState('');
 
-
+    let jsonResult;
 
     const handleClick = async (e: SelectChangeEvent) => {
         e.preventDefault()
         const deliveryData = {city, vehicle}
-        console.log(deliveryData)
-        try {
-            const result = await fetch("http://localhost:8080/delivery", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(deliveryData)
-            })
-            console.log(result)
-            const jsonresult = await result.json()
-            setDeliveryFee("Delivery fee: " + jsonresult + "€")
-            console.log("Delivery fee: " + deliveryFee)
-        } catch (error) {
-            const jsonresult = "Usage of selected vehicle type is forbidden"
-            setDeliveryFee(jsonresult)
-        }
+        await fetch("http://localhost:8080/delivery", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(deliveryData)
+        }).then(async response => {
+            if (!response.ok) {
+                jsonResult = "Usage of selected vehicle type is forbidden";
+                setDeliveryFee(jsonResult)
+            }
+            else {
+                jsonResult = await response.json();
+                setDeliveryFee("Delivery fee: " + jsonResult+"€")
+            }
+        })
     }
 
     return (

@@ -2,6 +2,9 @@ package com.raiki.app.rest.weather;
 
 import jakarta.xml.bind.annotation.*;
 
+/**
+ * Class for reading and storing data from the weather portal
+ */
 @XmlRootElement(name = "station")
 public class Station {
 
@@ -65,18 +68,4 @@ public class Station {
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
-
-
-    @Override
-    public String toString() {
-        return "Station{" +
-                "name='" + name + '\'' +
-                ", wmocode=" + wmocode +
-                ", airtemperature=" + airtemperature +
-                ", windspeed=" + windspeed +
-                ", phenomenon='" + phenomenon + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
-    }
-
 }

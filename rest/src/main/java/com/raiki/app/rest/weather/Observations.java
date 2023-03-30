@@ -16,6 +16,15 @@ public class Observations {
         return timestamp;
     }
 
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setStationList(List<Station> stationList) {
+        this.stationList = stationList;
+    }
+
     @XmlElement(name = "station")
     public List<Station> getStationList() {
         return stationList;

@@ -67,4 +67,12 @@ public class WeatherService {
         System.out.println("Get all weather data");
         return (List<Weather>) weatherRepository.findAll();
     }
+
+    /*
+    public static void main(String[] args) {
+        WeatherService weatherService = new WeatherService();
+        weatherService.getNeededStations();
+    }
+
+     */
 }

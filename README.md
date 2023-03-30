@@ -70,6 +70,6 @@ I used IntelliJ for developing and Oracle OpenJDK version 19 for the project SDK
 
 ## How to install and run the project
 1) Download and unzip the project
-2) Open the project in IntelliJ, use Oracle openjdk 19 as SDK (recommended)
-3) Start the backend application by running class called RestApiApplication (rest/src/main/java/com/raiki/app/rest/RestApiApplication.java). You can open the database console from address http://localhost:8080/h2-console and connect to the database -> JDBC URL has to be jdbc:h2:file:./data/fileDb (change it if it's not) -> username is "sa" and password is empty -> Connect. 
-4) Start the frontend -> Navigate to the src/frontend folder from the terminal -> write "npm install" and wait for the installation to be finished -> write "npm start" to start the application (application should start in the browser at http://localhost:3000)
+2) Open the project in IntelliJ (open from folder Food-Delivery-Application-main), use Oracle openjdk 19 as SDK (recommended, works with openjdk 20 as well)
+3) Start the backend application by running class called RestApiApplication (rest/src/main/java/com/raiki/app/rest/RestApiApplication.java). You can open the database console from address http://localhost:8080/h2-console and connect to the database -> JDBC URL has to be jdbc:h2:file:./rest/data/fileDb (change it if it's not) -> username is "sa" and password is empty -> Connect. 
+4) Start the frontend -> Navigate to the rest/src/frontend folder from the terminal -> write "npm install" and wait for the installation to be finished -> write "npm start" to start the application (application should start in the browser at http://localhost:3000)
